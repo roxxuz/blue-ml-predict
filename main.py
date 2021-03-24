@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 #Create Flask instance
 app = Flask(__name__)
 
-#Loding pretrained Tensorflow model
+#Loading pretrained Tensorflow model
 model = load_model('models/blue-tf-img-pred-model.h5')
 
 
@@ -20,13 +20,25 @@ model = load_model('models/blue-tf-img-pred-model.h5')
 #app.route defines what will happen when client visits the main page both for "GET" and "POST" methods.
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
+
    #If method is "POST" the file is saved in the uploads folder and the user is redirected to url /prediction/(uploaded filename)
    if request.method == 'POST':
+      
+      #saves file info in "file". (type = werkzeug.FileStorage)
       file = request.files['file']
-      print(file.filename)
+      
+      #If no file is selected then return to index.html (to prevent crash)
+      if file.filename == '':
+         return render_template('index.html')
+
+      # secure_filename returns a string that is converted without any special characters. (ASCII only)
       filename = secure_filename(file.filename)
-      print(filename)
+      
+      #Saving file 'uploads/<filename.jpg>'
+      #os.path.join conatinates one or more path components separated with a /
       file.save(os.path.join('uploads', filename))
+
+      #redirects to /prediction/<uploaded_file_name> 
       return redirect(url_for('prediction', filename=filename))
    
    #Else (if method is "GET") send user to index.html
