@@ -1,0 +1,31 @@
+body{
+  background-color:rgb(0, 0, 0)
+}
+
+#maintext{
+  position:absolute
+  margin:auto
+  width:700px
+  height:200px
+  text-align:center
+  top:0
+  bottom: 0
+  left: 0
+  right: 0
+}
+
+#predict_text{
+  position:absolute
+  margin:auto
+  width:700px
+  height:300px
+  text-align:center
+  top:0
+  bottom: 0
+  left: 0
+  right: 0
+}
+
+#predcit_table{
+  width:100%
+}
