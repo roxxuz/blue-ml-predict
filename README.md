@@ -1,2 +1,10 @@
 # blue-ml-predict
-Image recognition with deep learning. Deployed using sanic.
+Deep Learning.
+Image recognition with Tensorflow. 
+Deployed using Flask.
+
+## Github users team:
+roxxuz
+Akram-Mansour
+swardh
+
