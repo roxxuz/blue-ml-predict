@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 #Loading pretrained Tensorflow model
-model = load_model('models/blue-tf-img-pred-model.h5')
+model = load_model('models/1st_model.h5')
 
 
 
