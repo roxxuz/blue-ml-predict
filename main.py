@@ -31,6 +31,12 @@ def main_page():
       if file.filename == '':
          return render_template('index.html')
 
+      #prevent crash if a non-image file is uploaded
+      if (file.filename.split('.')[1] != 'jpg' and
+         file.filename.split('.')[1] != 'jpeg' and
+         file.filename.split('.')[1] != 'png'):
+            return render_template('index.html')
+
       # secure_filename returns a string that is converted without any special characters. (ASCII only)
       filename = secure_filename(file.filename)
       
