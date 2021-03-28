@@ -42,7 +42,7 @@ def main_page():
       
       #Saving file 'uploads/<filename.jpg>'
       #os.path.join conatinates one or more path components separated with a /
-      file.save(os.path.join('uploads', filename))
+      file.save(os.path.join('static/uploads', filename))
 
       #redirects to /prediction/<uploaded_file_name> 
       return redirect(url_for('prediction', filename=filename))
@@ -56,7 +56,7 @@ def main_page():
 def prediction(filename):
 
    #Image is read from the uploads folder using the filename from the created url.
-   image = plt.imread(os.path.join('uploads', filename))
+   image = plt.imread(os.path.join('static/uploads', filename))
 
    #Image is being resized to 32*32 pixels (the third argument/dimension number 3 is for RGB)
    image_resized = resize(image, (32, 32, 3))
@@ -85,9 +85,12 @@ def prediction(filename):
                   "prob2": int(round(probabilities[index[1]]*100, 0)),
                   "prob3": int(round(probabilities[index[2]]*100, 0))
                   }
+   
+   #Creating
+   image_path = os.path.join('../static/uploads', filename)
 
    #return will send user to predict.html (in templates folder) and make the predictions dictionary available in the html code.
-   return render_template('predict.html', predictions=predictions)
+   return render_template('predict.html', predictions=predictions, image_path=image_path)
 
 #start Flask server (debug=True to make the server restart after each save)
 app.run(host='127.0.0.1', port=8080, debug=True)
