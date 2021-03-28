@@ -9,6 +9,18 @@ from werkzeug.utils import secure_filename
 #Create Flask instance
 app = Flask(__name__)
 
+#Disable cache store.
+#When cache is stored the uploaded files are not updated if they got
+#the same filename as a previous uploaded file.
+@app.after_request
+def add_header(r):
+    
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
+
 #Loading pretrained Tensorflow model
 model = load_model('models/1st_model.h5')
 
