@@ -18,11 +18,11 @@ img {
   right: 0;
 }
 
-#main_image{
+#main-image{
   width: 600px;
 }
 
-#predict_text{
+#predict-text{
   position: absolute;
   margin: auto;
   width: 700px;
@@ -34,12 +34,23 @@ img {
   right: 0;
 }
 
-#predict_image{
+#predict-image{
   width: 300px;
 }
 
-#predict_table{
+#predict-table{
   width: 60%;
   margin-left: auto;
   margin-right: auto;
 }
+
+.new-pred-button{
+  height: 50px;
+  border: none;
+}
+
+/* .info-buttons{
+  width: 100px;
+  height: 25px;
+  font-size: 10px;
+} */
