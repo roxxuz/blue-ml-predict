@@ -8,13 +8,12 @@
     <link rel="stylesheet" href="/static/stylesheets/style.css">
   </head>
 
-<body style="background-color:black">
-  <div id="maintext"
-    style="position:absolute; margin:auto; width:700px; height:500px; text-align:center; top:0; bottom: 0; left: 0; right: 0;">
-    <img src="{{ image_path }}" width="300">
+<body>
+  <div id="predict_text">
+    <img id="predict_image" src="{{ image_path }}">
     
     <p class="text-light">  </p>
-    <table class="table-bordered text-light" style="width:100%">
+    <table id="predict_table" class="table-bordered text-light">
       <tr>
         <th>Rank</th>
         <th>Class</th>
