@@ -4,8 +4,7 @@
 
 <head>
   <title>Team Blue Deep Learning Image Classification</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link rel="stylesheet" href="/static/stylesheets/style.css">
 </head>
 
@@ -13,12 +12,14 @@
 
 
   <div id="main_text">
-    <img id="main_image" src="/static/tb-logo.jpg">
+    <img id="main-image" src="/static/tb-logo.jpg">
     <h4 class="text-light mb-5 mt-4"> DEEP LEARNING IMAGE CLASSIFICATION </h4>
     <form method=post enctype=multipart/form-data>
       <p class="text-light">
-        <input type=file name=file>
-        <input type=submit value=Predict>
+        <input type=file name=file id="img" style="display:none;">
+        <label for="img" class="btn btn-outline-light"> Choose File </label>
+        <br>
+        <input type=submit value=Predict class="btn btn-outline-light btn-lg mt-5 pred-button">
       </p>
     </form>
     <h6 class="text-light mt-5">Upload an image that represents one of the following: </h6>
