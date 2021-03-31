@@ -22,7 +22,7 @@ def add_header(r):
     return r
 
 #Loading pretrained Tensorflow model
-model = load_model('models/1st_model.h5')
+model = load_model('models/2nd_model.h5')
 
 
 
