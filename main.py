@@ -46,12 +46,12 @@ def main_page():
 		# Gets the url and splits it to get the file extension. If the end of the URL isn't a file extension it sets it as .jpg
 		a, b = os.path.splitext(url)
 		if b != "jpg" or "png" or "jpeg":
-			if "jpeg" in a:
-				b = "jpeg"
-			if "jpg" in a:
-				b = "jpg"
-			if "png" in a:
-				b = "png"
+			if "jpeg" in url:
+				b = ".jpeg"
+			if "jpg" in url:
+				b = ".jpg"
+			if "png" in url:
+				b = ".png"
 		
 		#If no file is selected then return to index.html (to prevent crash)
 		if file.filename != '':
