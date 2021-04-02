@@ -16,7 +16,7 @@ def getfromurl(url):
         pass
 
 
-def deletefile():
+def deletefiles():
     for i in os.listdir("images"):
         os.remove(f"images/{i}")
 

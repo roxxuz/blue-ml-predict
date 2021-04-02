@@ -5,6 +5,7 @@ from skimage.transform import resize
 from tensorflow.compat.v1.keras.models import load_model
 from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+from resize import getfromurl, deletefiles
 
 #Create Flask instance
 app = Flask(__name__)
@@ -24,40 +25,58 @@ def add_header(r):
 #Loading pretrained Tensorflow model
 model = load_model('models/2nd_model.h5')
 
-
-
-
-
+dl = 1
 
 #app.route defines what will happen when client visits the main page both for "GET" and "POST" methods.
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
+
+	# Empties the "uploads" folder
+	deletefiles()
 
 	#If method is "POST" the file is saved in the uploads folder and the user is redirected to url /prediction/(uploaded filename)
 	if request.method == 'POST':
 		
 		#saves file info in "file". (type = werkzeug.FileStorage)
 		file = request.files['file']
+
+		# Get url from textfield
+		url = request.form["url"]
+
+		# Gets the url and splits it to get the file extension. If the end of the URL isn't a file extension it sets it as .jpg
+		a, b = os.path.splitext(url)
+		if b != "jpg" or "png" or "jpeg":
+			b = ".jpg"
 		
 		#If no file is selected then return to index.html (to prevent crash)
-		if file.filename == '':
-			return render_template('index.html')
+		if file.filename != '':
+
+			# secure_filename returns a string that is converted without any special characters. (ASCII only)
+			filename = secure_filename(file.filename)
+
+			# Saving file 'uploads/<filename.jpg>'
+			# os.path.join conatinates one or more path components separated with a /
+			file.save(os.path.join('static/uploads', filename))
+
+			# redirects to /prediction/<uploaded_file_name>
+			return redirect(url_for('prediction', filename=filename))
+
+			# If textfield isn't empty, "getfromurl" method downloads the image from the url
+			global dl
+			if url != "":
+				getfromurl(url, dl, b)
+
+				# redirects to /prediction/<downloaded_file_name>
+				return redirect(url_for('prediction', filename=f"{str(dl)}{b}"))
+			dl += 1
 
 		#prevent crash if a non-image file is uploaded
-		if (file.filename.split('.')[1] != 'jpg' and
+		if file.filename == '' and url == "" and\
+			(file.filename.split('.')[1] != 'jpg' and
 			file.filename.split('.')[1] != 'jpeg' and
 			file.filename.split('.')[1] != 'png'):
 			return render_template('index.html')
 
-		# secure_filename returns a string that is converted without any special characters. (ASCII only)
-		filename = secure_filename(file.filename)
-		
-		#Saving file 'uploads/<filename.jpg>'
-		#os.path.join conatinates one or more path components separated with a /
-		file.save(os.path.join('static/uploads', filename))
-
-		#redirects to /prediction/<uploaded_file_name> 
-		return redirect(url_for('prediction', filename=filename))
 
 	#Else (if method is "GET") send user to index.html
 	return render_template('index.html')
