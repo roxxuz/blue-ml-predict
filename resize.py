@@ -5,20 +5,20 @@ import os
 import requests
 
 
-url = None
-
-def getfromurl(url):
+# Downloads an image from url
+def getfromurl(url, dl, ext):
     try:
         r = requests.get(url)
-        with open("images/x.jpg", "wb") as f:
+        with open(f"static/uploads/{dl}{ext}", "wb") as f:
             f.write(r.content)
     except:
-        pass
+        print("Something wrong with downloading the picture.")
 
 
 def deletefiles():
-    for i in os.listdir("images"):
-        os.remove(f"images/{i}")
+    for i in os.listdir("static/uploads/"):
+        if i != ".gitignore":
+            os.remove(f"static/uploads/{i}")
 
 
 #def get_np_array(image):

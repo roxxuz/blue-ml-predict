@@ -46,7 +46,12 @@ def main_page():
 		# Gets the url and splits it to get the file extension. If the end of the URL isn't a file extension it sets it as .jpg
 		a, b = os.path.splitext(url)
 		if b != "jpg" or "png" or "jpeg":
-			b = ".jpg"
+			if "jpeg" in a:
+				b = "jpeg"
+			if "jpg" in a:
+				b = "jpg"
+			if "png" in a:
+				b = "png"
 		
 		#If no file is selected then return to index.html (to prevent crash)
 		if file.filename != '':
@@ -62,13 +67,13 @@ def main_page():
 			return redirect(url_for('prediction', filename=filename))
 
 			# If textfield isn't empty, "getfromurl" method downloads the image from the url
-			global dl
-			if url != "":
-				getfromurl(url, dl, b)
+		global dl
+		if url != "":
+			getfromurl(url, dl, b)
 
-				# redirects to /prediction/<downloaded_file_name>
-				return redirect(url_for('prediction', filename=f"{str(dl)}{b}"))
-			dl += 1
+			# redirects to /prediction/<downloaded_file_name>
+			return redirect(url_for('prediction', filename=f"{str(dl)}{b}"))
+		dl += 1
 
 		#prevent crash if a non-image file is uploaded
 		if file.filename == '' and url == "" and\

@@ -1,3 +1,4 @@
+
 <!doctype html>
 
 <html>
@@ -13,18 +14,22 @@
 
   <div id="main_text">
     <img id="main-image" src="/static/tb-logo.jpg">
-    <h4 class="text-light mb-5 mt-4"> DEEP LEARNING IMAGE CLASSIFICATION </h4>
+    <h4 class="text-light mb-4 mt-4"> DEEP LEARNING IMAGE CLASSIFICATION </h4>
     <form method=post enctype=multipart/form-data>
       <p class="text-light">
         <input type=file name=file id="img" style="display:none;">
         <label for="img" class="btn btn-outline-light"> Choose File </label>
         <br>
-        <input type=submit value=Predict class="btn btn-outline-light btn-lg mt-5 pred-button">
+          <input class="mt-4" type="text" id="url-box" name="url" placeholder="URL to image" style="width: 400px;" autocomplete="off">
+        <br>
+        <input type=submit value=Predict class="btn btn-outline-light btn-lg mt-4 pred-button">
       </p>
+
     </form>
-    <h6 class="text-light mt-5">Upload an image that represents one of the following: </h6>
+    <h6 class="text-light mt-4">Upload an image that represents one of the following: </h6>
     <h6 class="text-light mb-1">airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck</h6>
   </div>
+
 </body>
 
 </html>
