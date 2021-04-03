@@ -44,6 +44,25 @@ img {
   margin-right: auto;
 }
 
+#done-text{
+  color: white;
+  position: absolute;
+  margin: auto;
+  width: 700px;
+  height: 100%;
+  text-align: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#done-logo{
+  align-content: center;
+  width: 300px;
+}
+
+
 .pred-button{
   width: 60%;
 }
