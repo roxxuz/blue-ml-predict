@@ -20,9 +20,8 @@
                 For those who are interested in more details or want to see the code itself, the entire project is
                 available
                 on <a href="https://github.com/roxxuz/blue-ml-predict">GitHub</a>.
-                We will also use links where you can read a little deeper about different topics, names or special
-                concepts, if desired.<br>
-                The description is divided into different steps to mimic the steps in which we divided the work.
+                <br>
+                The description is divided into the different topics in which we divided the work.
             </i>
         </p>
 
@@ -60,10 +59,11 @@
         <h4 class="mt-5 ml-2" style="text-align:left;">The data</h4>
         <section style="text-align:left; padding:10px;" class="text-light border border-light">
             <p>
-                Now we have our model ready with a variety of layers. 
+                Now we have our model ready with a variety of layers.
                 So how are we going to use this to teach the model which images represent what?<br>
-                With the help of 50,000 pictures!<br>
-                We convert the images into numbers so that the calculations in the layers can handle them, 
+                With the help of 50,000 images!<br>
+                First we downsize the images to the same size.
+                Then we convert the images into numbers so that the calculations in the layers can handle them,
                 and then sending all 50,000 images to our model and through all layers, one by one.
                 This is called "training the model".
             </p>
@@ -71,19 +71,22 @@
         <h4 class="mt-5 ml-2" style="text-align:left;">The training</h4>
         <section style="text-align:left; padding:10px;" class="text-light border border-light">
             <p>
-                The training of the model is done by sending each image through all 
-                our layers to get a result from the last layer. The result is the answer to what the 
-                model thinks the image represents.<br> 
+                The training of the model is done by sending each image through all
+                our layers to get a result from the last layer. The result is the answer to what the
+                model thinks the image represents.<br>
                 The model's answer is then checked against what the correct answer is.
-                The settings in the layers are adjusted based on the model's 
-                performance and then the whole process is run over and over again. 
-                This process continues until the model is trained so well that it now with 
+                The settings in the layers are adjusted based on the model's
+                performance and then the whole process is running over and over again.
+            </p>
+            <p>
+                This process continues until the model is trained so well that it now with
                 great probability can determine what the images represent.
-                This is a very demanding process that can take a very long 
-                time depending on how many images you use, the size of the images, 
-                and the settings in our layers. We used an extra powerful computer 
+                This is a very demanding process that can take a very long
+                time depending on how many images you use, the size of the images,
+                and the settings in our layers. We used a powerful computer
                 with 20 logical processors and our model took a little over 8 hours to train.
             </p>
+
         </section>
 
     </div>
