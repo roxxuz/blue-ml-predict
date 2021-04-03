@@ -11,10 +11,10 @@
 <body>
 
     <div id="done-text">
-        <img id="done-logo" src="../static/tb-logo.jpg" class="mb-2 mt-5">
-        <h1>This is how it was done</h1>
+        <img id="done-logo" src="../static/tb-logo.jpg" class="mt-5">
+        <h1 class="mt-4">This is how it was done</h1>
 
-        <p class="text-light" style="text-align: left;">
+        <p class="text-light mt-4" style="text-align: left;">
             <i>
                 We will try to describe the steps as non-technical as possible.<br>
                 For those who are interested in more details or want to see the code itself, the entire project is
@@ -27,28 +27,62 @@
         </p>
 
         <h4 class="mt-5 ml-2" style="text-align:left;">The model</h4>
-
         <section style="text-align:left; padding:10px;" class="text-light border border-light">
             <p>
                 A model represents what was learned by a machine learning algorithm.
                 It is the "thing" that will be used to determine what an image represents,
                 and thus also the very heart of the process.<br>
-                Our model is created with the help of so-called 
+                Our model is created with the help of so-called
                 <a href="https://en.wikipedia.org/wiki/Deep_learning">deep learning</a>,
-                and more specifically a 
+                and more specifically a
                 <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">convolutional neural network</a>.
             </p>
+        </section>
+        <h4 class="mt-5 ml-2" style="text-align:left;">The layers</h4>
+        <section style="text-align:left; padding:10px;" class="text-light border border-light">
             <p>
-                When we create a model for deep learning, we build up a number of 
-                layers where different calculations are made for each layer. 
-                There are a variety of settings for each layer. This means there is a lot 
+                When we create a model for deep learning, we add a number of
+                layers to the model, containing different calculations for each layer.
+                There are also a variety of settings for each layer. This means there is a lot
                 to test and customize to get the best model possible.<br>
-                If a model does not perform as expected, 
+                If a model does not perform as expected,
                 it can often be (but certainly not always) the settings in these layers
-                 that needs to be adjusted. It may also be the case that you should 
-                 use completely different layers, a different order of the layers 
-                 or a different number of layers. As you can see, there are already 
-                 many different paths to take here.
+                that needs to be adjusted. It may also be the case that you should
+                use completely different layers, a different order of the layers
+                or a different number of layers. As you can see, there are already
+                many different decisions to make.
+            </p>
+            <p>
+                These layers are added to the model, one after another, and together they form a neural network.
+            </p>
+            <img id="img-nn" src="../static/tb_neural_network.png" class="mt-5">
+        </section>
+        <h4 class="mt-5 ml-2" style="text-align:left;">The data</h4>
+        <section style="text-align:left; padding:10px;" class="text-light border border-light">
+            <p>
+                Now we have our model ready with a variety of layers. 
+                So how are we going to use this to teach the model which images represent what?<br>
+                With the help of 50,000 pictures!<br>
+                We convert the images into numbers so that the calculations in the layers can handle them, 
+                and then sending all 50,000 images to our model and through all layers, one by one.
+                This is called "training the model".
+            </p>
+        </section>
+        <h4 class="mt-5 ml-2" style="text-align:left;">The training</h4>
+        <section style="text-align:left; padding:10px;" class="text-light border border-light">
+            <p>
+                The training of the model is done by sending each image through all 
+                our layers to get a result from the last layer. The result is the answer to what the 
+                model thinks the image represents.<br> 
+                The model's answer is then checked against what the correct answer is.
+                The settings in the layers are adjusted based on the model's 
+                performance and then the whole process is run over and over again. 
+                This process continues until the model is trained so well that it now with 
+                great probability can determine what the images represent.
+                This is a very demanding process that can take a very long 
+                time depending on how many images you use, the size of the images, 
+                and the settings in our layers. We used an extra powerful computer 
+                with 20 logical processors and our model took a little over 8 hours to train.
             </p>
         </section>
 

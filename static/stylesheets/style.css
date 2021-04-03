@@ -1,4 +1,6 @@
 body{
+  background-image: url("../space2.jpg");
+  background-size: 100%;
   background-color:rgb(0, 0, 0);
 }
 
@@ -60,6 +62,13 @@ img {
 #done-logo{
   align-content: center;
   width: 300px;
+}
+
+#img-nn{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
 
 
