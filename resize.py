@@ -59,7 +59,7 @@ def resize(filename, save_image=True):
     ###GET RESIZED IMAGE AS NP ARRAY
     n_array = np.asarray(cropped_image)
     np_array = n_array/255
-  #  np_array = np_array[:, :, :3]
+    np_array = np_array[:, :, :3]
 
-    return np_array,
+    return np_array
 

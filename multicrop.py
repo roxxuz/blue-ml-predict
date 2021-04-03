@@ -6,6 +6,7 @@ import os
 from tensorflow.compat.v1.keras.models import load_model
 import matplotlib.pyplot as plt
 
+#Dictionary to combine scores from all versions of the image
 score = {
     'Airplane': 0,
     'Car': 0,
@@ -19,11 +20,13 @@ score = {
     'Truck': 0
 }
 
+#Tensorflow model for the predictions
 model = load_model('models/2nd_model.h5')
 
 def multicrop(image, filename):
     global run
-#    image = Image.open(image)
+
+    #Get the size of the picture. Height/Width/Difference
     width, height = image.size
     diff = width - height
     exp_diff = int(diff ** 2)
@@ -34,15 +37,15 @@ def multicrop(image, filename):
 
     if width > height:
         square = int(height * 0.7)
-        negsquare = int(height * 0.3)
+        negsquare = int(width / 2 - square / 2)
         sidecrop = int((width - square) / 2)
         topcrop = int((height - square) / 2)
 
         box1 = (0, 0, square, square)
         box2 = (negsquare, 0, square + negsquare, square)
         box3 = (width-square, 0, width, square)
-        box4 = (0, negsquare, square, height)
-        box5 = (negsquare, height - square, square + negsquare, height)
+        box4 = (0, height-square, square, height)
+        box5 = (negsquare, height-square , square + negsquare, height)
         box6 = (width-square, height - square, width, height)
         box7 = (0, 0, width-squared_diff, height)
         box8 = (half_crop, 0, width - half_crop, height)
@@ -53,9 +56,13 @@ def multicrop(image, filename):
 
     else:
         square = int(width * 0.7)
-        negsquare = int(width * 0.3)
+        negsquare = int(height / 2 - square / 2)
         sidecrop = int((width - square) / 2)
         topcrop = int((height - square) / 2)
+
+        print(height)
+        print(square)
+        print(negsquare)
 
         box1 = (0, 0, square, square)
         box2 = (width-square, 0, width, square)
@@ -175,9 +182,13 @@ def ten_crop_pred(filename):
 
 
 def mirror_image(filename):
+
+    #Make a mirror version of the image.
     image = Image.open("static/uploads/"+filename)
     mirror = ImageOps.mirror(image)
     mirror.save(f"static/uploads/mirror{filename}")
+
+    #Makes an numpy array of the picture
     np_array = np.asarray(mirror)
     np_array = np_array/255
 

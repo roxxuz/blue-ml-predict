@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7fc04284-27b6-48df-88bc-28a1095eb972" name="Default Changelist" comment="dont know">
-      <change afterPath="$PROJECT_DIR$/multicrop.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prediction.py" afterDir="false" />
+    <list default="true" id="7fc04284-27b6-48df-88bc-28a1095eb972" name="Default Changelist" comment="10crop, center, mirror&#10;ways to handle image">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multicrop.py" beforeDir="false" afterPath="$PROJECT_DIR$/multicrop.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resize.py" beforeDir="false" afterPath="$PROJECT_DIR$/resize.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +75,13 @@
       <option name="presentableId" value="LOCAL−00002" />
       <updated>1617358706291</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL−00003" summary="10crop, center, mirror&#10;ways to handle image">
+      <created>1617482338577</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1617482338577</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -106,7 +111,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added URL" />
     <MESSAGE value="added URL in main.py and index.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="added URL in main.py and index.html" />
+    <MESSAGE value="10crop, center, mirror&#10;ways to handle image" />
+    <option name="LAST_COMMIT_MESSAGE" value="10crop, center, mirror&#10;ways to handle image" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

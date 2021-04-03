@@ -86,27 +86,33 @@ def main_page():
 
 #app.route defines what will happen when client visits /prediction/(uploaded filename)
 @app.route('/prediction/<filename>')
-def prediction(filename, type="center"):
+def prediction(filename, type="original"):
 
 	if type == "original":
 
 		# Image is read from the uploads folder using the filename from the created url.
 		image = plt.imread(os.path.join('static/uploads', filename))
 
+		#Sending image and filename to predict method and getting predictions and image_path in return
 		predictions, image_path = pred(image, filename)
 
-
+	#Makes a mirror version of the image
 	elif type == "mirror":
 		image = mirror_image(filename)
 		filename = "mirror" + filename
-
+		# Sending image and filename to predict method and getting predictions and image_path in return
 		predictions, image_path = pred(image, filename)
 
+	#Crops the center of the image. (long sides (height or width) gets cut off, short side (height or width) stays the same).
 	elif type == "center":
 		image = resize(filename)
+		# Sending image and filename to predict method and getting predictions and image_path in return
 		predictions, image_path = pred(np.array(image), filename)
 
 	elif type == "10crop":
+
+		#Sending filename to ten crop method to make 10 versions of the same image
+		#The probability score gets combined for all 10 versions to make a final/combined probability score
 		predictions, image_path = ten_crop_pred(filename)
 
 	#return will send user to predict.html (in templates folder) and make the predictions dictionary available in the html code.
