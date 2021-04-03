@@ -53,8 +53,9 @@
             </p>
             <p>
                 These layers are added to the model, one after another, and together they form a neural network.
+                <img id="done-images" src="../static/tb_neural_network.png" class="mt-1">
             </p>
-            <img id="img-nn" src="../static/tb_neural_network.png" class="mt-5">
+            
         </section>
         <h4 class="mt-5 ml-2" style="text-align:left;">The data</h4>
         <section style="text-align:left; padding:10px;" class="text-light border border-light">
@@ -85,6 +86,19 @@
                 time depending on how many images you use, the size of the images,
                 and the settings in our layers. We used a powerful computer
                 with 20 logical processors and our model took a little over 8 hours to train.
+            </p>
+            <p>
+                The last step in the training process is to validate our models accuracy score
+                with some images that our model hos not yet seen.
+                We use another 10,000 images for this.<br>
+                The trained models accuracy score and the accuracy score from 
+                our 10,000 unseeen images matched at 86%.<br>
+                Wow! Great.
+            </p>
+            <p>
+                Our model is now trained and ready to predict more unseen images.
+                <h5 style="text-align: center;">Training our model</h5>
+                <img id="done-images" src="../static/training.png" class="mt-1">
             </p>
 
         </section>
