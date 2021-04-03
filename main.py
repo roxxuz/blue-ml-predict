@@ -1,11 +1,11 @@
 import os
-import numpy as np
 import matplotlib.pyplot as plt
-from skimage.transform import resize
-from tensorflow.compat.v1.keras.models import load_model
 from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
-from resize import getfromurl, deletefiles
+from resize import getfromurl, deletefiles, resize
+from multicrop import multicrop, ten_crop_pred, mirror_image
+from prediction import prediction as pred
+import numpy as np
 
 #Create Flask instance
 app = Flask(__name__)
@@ -21,9 +21,6 @@ def add_header(r):
 	r.headers["Expires"] = "0"
 	r.headers['Cache-Control'] = 'public, max-age=0'
 	return r
-
-#Loading pretrained Tensorflow model
-model = load_model('models/2nd_model.h5')
 
 dl = 1
 
@@ -89,44 +86,38 @@ def main_page():
 
 #app.route defines what will happen when client visits /prediction/(uploaded filename)
 @app.route('/prediction/<filename>')
-def prediction(filename):
+def prediction(filename, type="original"):
 
-	#Image is read from the uploads folder using the filename from the created url.
-	image = plt.imread(os.path.join('static/uploads', filename))
+	if type == "original":
 
-	#Image is being resized to 32*32 pixels (the third argument/dimension number 3 is for RGB)
-	image_resized = resize(image, (32, 32, 3))
+		# Image is read from the uploads folder using the filename from the created url.
+		image = plt.imread(os.path.join('static/uploads', filename))
 
-	#Predicting the uploaded image with our pretrained model. np.array() is used to transform 3D-array to 4D-array.
-	#  this is mandatory for the predict function.
-	probabilities = model.predict(np.array([image_resized,]))[0,:]
+		#Sending image and filename to predict method and getting predictions and image_path in return
+		predictions, image_path = pred(image, filename)
 
-	#probabilities(array) index positions gets sorted from lowest to highest prediction values, and saved in array called 'index'.
-	index = np.argsort(probabilities)
+	#Makes a mirror version of the image
+	elif type == "mirror":
+		image = mirror_image(filename)
+		filename = "mirror" + filename
+		# Sending image and filename to predict method and getting predictions and image_path in return
+		predictions, image_path = pred(image, filename)
 
-	#Array named 'index' is reversed with [::-1] to get the top predictions first.
-	index = index[::-1]
+	#Crops the center of the image. (long sides (height or width) gets cut off, short side (height or width) stays the same).
+	elif type == "center":
+		image = resize(filename)
+		# Sending image and filename to predict method and getting predictions and image_path in return
+		predictions, image_path = pred(np.array(image), filename)
 
-	#Creating a list with all classes (this is for the prediction output text)
-	classes = ['Airplane', 'Car', 'Bird',
-				'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
+	elif type == "10crop":
 
-	#Creating dictionary with top 3 predictions based on the index array.
-	#probabilities value are converted to "percent" and int. ( 0.6789457384 = 68)
-	predictions = {
-					"class1": classes[index[0]],
-					"class2": classes[index[1]],
-					"class3": classes[index[2]],
-					"prob1": int(round(probabilities[index[0]]*100, 0)),
-					"prob2": int(round(probabilities[index[1]]*100, 0)),
-					"prob3": int(round(probabilities[index[2]]*100, 0))
-					}
-
-	#Creating
-	image_path = os.path.join('../static/uploads', filename)
+		#Sending filename to ten crop method to make 10 versions of the same image
+		#The probability score gets combined for all 10 versions to make a final/combined probability score
+		predictions, image_path = ten_crop_pred(filename)
 
 	#return will send user to predict.html (in templates folder) and make the predictions dictionary available in the html code.
 	return render_template('predict.html', predictions=predictions, image_path=image_path)
 
 #start Flask server (debug=True to make the server restart after each save)
-app.run(host='127.0.0.1', port=8080, debug=True)
+if __name__ == "__main__":
+	app.run(host='127.0.0.1', port=8080, debug=True)
