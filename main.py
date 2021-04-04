@@ -68,8 +68,8 @@ def main_page():
 				b = ".jpg"
 			if "png" in url:
 				b = ".png"
-		else:
-			b = '.jpg'
+			else:
+				b = '.jpg'
 		
 		#If no file is selected then return to index.html (to prevent crash)
 		if file.filename != '':
