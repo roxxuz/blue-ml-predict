@@ -123,6 +123,10 @@ def prediction(filename, type="original"):
 	#return will send user to predict.html (in templates folder) and make the predictions dictionary available in the html code.
 	return render_template('predict.html', predictions=predictions, image_path=image_path)
 
+@app.route('/howItWasDone')
+def howItWasDone():
+	return render_template('how-it-was-done.html')
+
 #start Flask server (debug=True to make the server restart after each save)
 if __name__ == "__main__":
 	app.run(host='127.0.0.1', port=8080, debug=True)
