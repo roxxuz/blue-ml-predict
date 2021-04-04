@@ -1,4 +1,6 @@
 body{
+  /*background-image: url("../space2.jpg");
+  background-size: 100%;*/
   background-color:rgb(0, 0, 0);
 }
 
@@ -43,6 +45,32 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
+
+#done-text{
+  color: white;
+  position: absolute;
+  margin: auto;
+  width: 700px;
+  height: 100%;
+  text-align: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#done-logo{
+  align-content: center;
+  width: 300px;
+}
+
+#done-images{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
 
 .pred-button{
   width: 60%;
