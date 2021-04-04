@@ -24,6 +24,9 @@ def add_header(r):
 
 dl = 1
 
+#Global variable slider to get access in both main_page and prediction method.
+#slider = '0'
+
 #app.route defines what will happen when client visits the main page both for "GET" and "POST" methods.
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
@@ -39,6 +42,11 @@ def main_page():
 
 		# Get url from textfield
 		url = request.form["url"]
+
+		#Writing globaly to slider
+		#Getting value from html form and input name = slider
+		#global slider
+		slider = request.form['slider']
 
 		#Prevent crash when no file is selected or
 		#the file is not an image
@@ -60,6 +68,8 @@ def main_page():
 				b = ".jpg"
 			if "png" in url:
 				b = ".png"
+		else:
+			b = '.jpg'
 		
 		#If no file is selected then return to index.html (to prevent crash)
 		if file.filename != '':
@@ -70,9 +80,9 @@ def main_page():
 			# Saving file 'uploads/<filename.jpg>'
 			# os.path.join conatinates one or more path components separated with a /
 			file.save(os.path.join('static/uploads', filename))
-
+			print(f'===> Slider in main: {slider}')
 			# redirects to /prediction/<uploaded_file_name>
-			return redirect(url_for('prediction', filename=filename))
+			return redirect(url_for('prediction', filename=filename, slider=slider))
 
 			# If textfield isn't empty, "getfromurl" method downloads the image from the url
 		global dl
@@ -80,7 +90,7 @@ def main_page():
 			getfromurl(url, dl, b)
 
 			# redirects to /prediction/<downloaded_file_name>
-			return redirect(url_for('prediction', filename=f"{str(dl)}{b}"))
+			return redirect(url_for('prediction', filename=f"{str(dl)}{b}", slider=slider))
 		dl += 1
 
 
@@ -90,8 +100,21 @@ def main_page():
 
 
 #app.route defines what will happen when client visits /prediction/(uploaded filename)
-@app.route('/prediction/<filename>')
-def prediction(filename, type="original"):
+@app.route('/prediction/<filename><slider>')
+def prediction(filename, slider):
+
+	#Checking the value of global variable 'slider'.
+	#This is from the html slider to select pre-processing method.
+	if slider == '1':
+		type = 'original'
+	elif slider == '2':
+		type = 'mirror'
+	elif slider == '3':
+		print('=======> Im in elif 3')
+		type = 'center'
+	elif slider == '4':
+		type = '10crop'
+
 
 	if type == "original":
 
