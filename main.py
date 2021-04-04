@@ -40,6 +40,17 @@ def main_page():
 		# Get url from textfield
 		url = request.form["url"]
 
+		#Prevent crash when no file is selected or
+		#the file is not an image
+		if file.filename == '' and url == '':
+			print('inside if')
+			return render_template('index.html')
+		elif (file.filename != '' and
+			os.path.splitext(file.filename)[1] != '.jpg' and
+		 	os.path.splitext(file.filename)[1] != '.jpeg' and
+		 	os.path.splitext(file.filename)[1] != '.png'):
+			return render_template('index.html')
+		
 		# Gets the url and splits it to get the file extension. If the end of the URL isn't a file extension it sets it as .jpg
 		a, b = os.path.splitext(url)
 		if b != "jpg" or "png" or "jpeg":
@@ -72,12 +83,6 @@ def main_page():
 			return redirect(url_for('prediction', filename=f"{str(dl)}{b}"))
 		dl += 1
 
-		#prevent crash if a non-image file is uploaded
-		if file.filename == '' and url == "" and\
-			(file.filename.split('.')[1] != 'jpg' and
-			file.filename.split('.')[1] != 'jpeg' and
-			file.filename.split('.')[1] != 'png'):
-			return render_template('index.html')
 
 
 	#Else (if method is "GET") send user to index.html
