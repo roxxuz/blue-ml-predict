@@ -103,14 +103,14 @@ def main_page():
 @app.route('/prediction/<filename><slider>')
 def prediction(filename, slider):
 
-	#Checking the value of global variable 'slider'.
-	#This is from the html slider to select pre-processing method.
+	#Checking the value of variable 'slider'.
+	#This is from the html slider in index.html 
+	#to select pre-processing method.
 	if slider == '1':
 		type = 'original'
 	elif slider == '2':
 		type = 'mirror'
 	elif slider == '3':
-		print('=======> Im in elif 3')
 		type = 'center'
 	elif slider == '4':
 		type = '10crop'
