@@ -6,6 +6,7 @@ from resize import getfromurl, deletefiles, resize
 from multicrop import multicrop, ten_crop_pred, mirror_image
 from prediction import prediction as pred
 import numpy as np
+from multicrop import score
 
 #Create Flask instance
 app = Flask(__name__)
@@ -33,6 +34,10 @@ def main_page():
 
 	# Empties the "uploads" folder
 	deletefiles()
+
+	# Reset "score" dictionary
+	for key in score.keys():
+		score[key] = 0
 
 	#If method is "POST" the file is saved in the uploads folder and the user is redirected to url /prediction/(uploaded filename)
 	if request.method == 'POST':
