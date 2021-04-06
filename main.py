@@ -155,6 +155,10 @@ def prediction(filename, slider):
 def howItWasDone():
 	return render_template('how-it-was-done.html')
 
+@app.route('/aboutUs')
+def aboutUs():
+   return render_template('aboutUs.html')
+
 #start Flask server (debug=True to make the server restart after each save)
 if __name__ == "__main__":
 	app.run(host='127.0.0.1', port=8080, debug=True)
