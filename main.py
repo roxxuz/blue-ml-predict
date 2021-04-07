@@ -108,6 +108,8 @@ def main_page():
 @app.route('/prediction/<filename><slider>')
 def prediction(filename, slider):
 
+	original_image_path = "static/uploads/" + filename
+
 	#Checking the value of variable 'slider'.
 	#This is from the html slider in index.html 
 	#to select pre-processing method.
@@ -125,12 +127,15 @@ def prediction(filename, slider):
 
 		# Image is read from the uploads folder using the filename from the created url.
 		image = plt.imread(os.path.join('static/uploads', filename))
-
+		resize(filename, False, True)
+		filename = "distorted" + filename
 		#Sending image and filename to predict method and getting predictions and image_path in return
 		predictions, image_path = pred(image, filename)
 
 	#Makes a mirror version of the image
 	elif type == "mirror":
+		resize(filename, False, True)
+		filename = "distorted" + filename
 		image = mirror_image(filename)
 		filename = "mirror" + filename
 		# Sending image and filename to predict method and getting predictions and image_path in return
@@ -139,6 +144,7 @@ def prediction(filename, slider):
 	#Crops the center of the image. (long sides (height or width) gets cut off, short side (height or width) stays the same).
 	elif type == "center":
 		image = resize(filename)
+		filename = "center_crop" + filename
 		# Sending image and filename to predict method and getting predictions and image_path in return
 		predictions, image_path = pred(np.array(image), filename)
 
@@ -158,6 +164,7 @@ def howItWasDone():
 @app.route('/aboutUs')
 def aboutUs():
    return render_template('aboutUs.html')
+
 
 #start Flask server (debug=True to make the server restart after each save)
 if __name__ == "__main__":

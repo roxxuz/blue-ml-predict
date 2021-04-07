@@ -23,6 +23,41 @@ score = {
 #Tensorflow model for the predictions
 model = load_model('models/2nd_model.h5')
 
+def concat_image(filename):
+    from PIL import Image
+
+    im1 = Image.open(f"static/uploads/1{filename}")
+    im2 = Image.open(f"static/uploads/2{filename}")
+    im3 = Image.open(f"static/uploads/3{filename}")
+    im4 = Image.open(f"static/uploads/4{filename}")
+    im5 = Image.open(f"static/uploads/5{filename}")
+    im6 = Image.open(f"static/uploads/6{filename}")
+    im7 = Image.open(f"static/uploads/7{filename}")
+    im8 = Image.open(f"static/uploads/8{filename}")
+    im9 = Image.open(f"static/uploads/9{filename}")
+    im10 = Image.open(f"static/uploads/10{filename}")
+
+    w, h = im1.size
+
+    print(w, h)
+
+    newim = Image.new("RGB", (4 * w, 3 * w), (0, 0, 0))
+
+    newim.paste(im1, (int(w), 0))
+    newim.paste(im2, (int(w * 2), 0))
+    newim.paste(im3, (int(0), w))
+    newim.paste(im4, (w, w))
+    newim.paste(im5, (w * 2, w))
+    newim.paste(im6, (w * 3, w))
+    newim.paste(im7, (0, w * 2))
+    newim.paste(im8, (int(w), w * 2))
+    newim.paste(im9, (int(w * 2), w * 2))
+    newim.paste(im10, (int(w * 3), w * 2))
+
+    newim.save("static/uploads/multiPic.jpg")
+ #   newim.show()
+
+
 def multicrop(image, filename):
     global run
 
@@ -98,6 +133,8 @@ def multicrop(image, filename):
     crop8.save(f"static/uploads/8{filename}")
     crop9.save(f"static/uploads/9{filename}")
     crop10.save(f"static/uploads/10{filename}")
+
+    concat_image(filename)
 
     crops = [crop1, crop2, crop3, crop4, crop5, crop6, crop7, crop8, crop9, crop10]
 
@@ -176,8 +213,9 @@ def ten_crop_pred(filename):
                       }
 
        # Creating
-       image_path = os.path.join('../static/uploads', filename)
+   #    image_path = os.path.join('../static/uploads', filename)
 
+       image_path = "/static/uploads/multiPic.jpg"
        return predictions, image_path
 
 

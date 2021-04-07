@@ -70,7 +70,7 @@ img {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  
+
 }
 
 #done-pred-images{
@@ -231,4 +231,7 @@ img {
 .zoom-img:hover {
     -webkit-transform:scale(2.5); /* or some other value */
     transform:scale(2.5);
+}
+#preprocess {
+  color: white
 }
