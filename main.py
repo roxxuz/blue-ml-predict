@@ -108,7 +108,10 @@ def main_page():
 @app.route('/prediction/<filename><slider>')
 def prediction(filename, slider):
 
-	original_image_path = "static/uploads/" + filename
+	#Original file name for mouse hover on predicted image in predict.html
+	original_image_path = "../static/uploads/" + filename
+
+	print(original_image_path)
 
 	#Checking the value of variable 'slider'.
 	#This is from the html slider in index.html 
@@ -154,8 +157,13 @@ def prediction(filename, slider):
 		#The probability score gets combined for all 10 versions to make a final/combined probability score
 		predictions, image_path = ten_crop_pred(filename)
 
+	#This will make sure that there are no backslashes in the file path
+	#html <img src=> Can handle any slash.
+	#javascript code in <script> tags can not handle paths with backslash.
+	image_path = image_path.replace('\\', '/')
+
 	#return will send user to predict.html (in templates folder) and make the predictions dictionary available in the html code.
-	return render_template('predict.html', predictions=predictions, image_path=image_path)
+	return render_template('predict.html', predictions=predictions, image_path=image_path, original_image_path=original_image_path)
 
 @app.route('/howItWasDone')
 def howItWasDone():

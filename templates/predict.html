@@ -15,9 +15,10 @@
     <div id="predict-text">
       <img
         id="predict-image"
-        src="{{ image_path }}"
+        src="{{ image_path }}" onmouseover="hover(this);" onmouseout="unhover(this);"
         class="border border-light mb-2"
       />
+
 
       <p class="text-light"></p>
       <table id="predict-table" class="table-bordered text-light">
@@ -63,8 +64,16 @@
           class="btn btn-outline-light btn-sm mt-2 ml-4 mr-4 info-buttons"
         >
           About Us
-        </button></a
-      >
+        </button></a>
     </div>
   </body>
+  <script>
+    function hover(element) {
+        element.setAttribute('src', '{{ original_image_path }}');
+      }
+
+      function unhover(element) {
+        element.setAttribute('src', '{{ image_path }}');
+      }
+  </script>
 </html>
