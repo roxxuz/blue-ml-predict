@@ -41,6 +41,15 @@ img {
   width: 300px;
 }
 
+#pred-img-div {
+  height: 300px; 
+  width: 300px; 
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 #predict-table{
   width: 60%;
   margin-left: auto;

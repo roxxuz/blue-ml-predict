@@ -111,8 +111,6 @@ def prediction(filename, slider):
 	#Original file name for mouse hover on predicted image in predict.html
 	original_image_path = "../static/uploads/" + filename
 
-	print(original_image_path)
-
 	#Checking the value of variable 'slider'.
 	#This is from the html slider in index.html 
 	#to select pre-processing method.
