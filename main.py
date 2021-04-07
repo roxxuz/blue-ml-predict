@@ -134,6 +134,8 @@ def prediction(filename, slider):
 
 	#Makes a mirror version of the image
 	elif type == "mirror":
+		resize(filename, False, True)
+		filename = "distorted" + filename
 		image = mirror_image(filename)
 		filename = "mirror" + filename
 		# Sending image and filename to predict method and getting predictions and image_path in return
