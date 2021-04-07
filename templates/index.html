@@ -22,17 +22,15 @@
         <input type=file name=file id="img" style="display:none;">
         <label for="img" class="btn btn-outline-light"> Upload Image </label>
         <br>
-        <p>{{filename}}</p>
-        <br>
           <input class="mt-3" type="text" id="url-box" name="url" placeholder="Or paste a URL to the image here..." style="width: 400px;" autocomplete="off">
         <br>
-        <div class="border border-light rounded mt-4" style="margin-inline: 30%; padding:5px;">
+        <div class="border border-light rounded mt-4" style="margin-inline: 30%; padding:7px;">
         <h6 class="text-light">Select pre-processing method</h6>
-        <input type="range" value="1" min="1" max="4" name="slider" class="mt-2" oninput="this.nextElementSibling.value = this.value">
+        <input type="range" value="1" min="1" max="4" name="slider" oninput="this.nextElementSibling.value = this.value">
         <output class="text-light">1</output>
         <br>
 
-        <p><p title="1 – Original
+        <p title="1 – Original
 
 This just resizes the image to 32x32 pixels. Unless the image is square, it will distort the image.
 
@@ -47,7 +45,7 @@ This cuts off the sides to make the picture square before resizing it. Image wil
 4 – 10crop
 
 This crops the image 10 times in different places. Each image gets a prediction score. The scores for each class are added up for a final predictionscore.
-"><i id="preprocess">What is this?</i></p>
+" class="mb-1" style="cursor: pointer; margin-inline: 30%;"><i id="preprocess">What is this?</i></p>
         
         </div>
         <input type=submit value=Predict class="btn btn-outline-light btn-lg mt-4 pred-button">
