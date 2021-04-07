@@ -23,10 +23,8 @@ def add_header(r):
 	r.headers['Cache-Control'] = 'public, max-age=0'
 	return r
 
+#download counter for url inputs
 dl = 1
-
-#Global variable slider to get access in both main_page and prediction method.
-#slider = '0'
 
 #app.route defines what will happen when client visits the main page both for "GET" and "POST" methods.
 @app.route('/', methods=['GET', 'POST'])
@@ -36,6 +34,7 @@ def main_page():
 	deletefiles()
 
 	# Reset "score" dictionary
+	# Needed for the 10crop pre-processing method
 	for key in score.keys():
 		score[key] = 0
 
@@ -56,7 +55,6 @@ def main_page():
 		#Prevent crash when no file is selected or
 		#the file is not an image
 		if file.filename == '' and url == '':
-			print('inside if')
 			return render_template('index.html')
 		elif (file.filename != '' and
 			os.path.splitext(file.filename)[1] != '.jpg' and
@@ -66,7 +64,7 @@ def main_page():
 		
 		# Gets the url and splits it to get the file extension. If the end of the URL isn't a file extension it sets it as .jpg
 		a, b = os.path.splitext(url)
-		if b != "jpg" or "png" or "jpeg":
+		if b != ".jpg" or ".png" or ".jpeg":
 			if "jpeg" in url:
 				b = ".jpeg"
 			if "jpg" in url:
@@ -85,7 +83,6 @@ def main_page():
 			# Saving file 'uploads/<filename.jpg>'
 			# os.path.join conatinates one or more path components separated with a /
 			file.save(os.path.join('static/uploads', filename))
-			print(f'===> Slider in main: {slider}')
 			# redirects to /prediction/<uploaded_file_name>
 			return redirect(url_for('prediction', filename=filename, slider=slider))
 
