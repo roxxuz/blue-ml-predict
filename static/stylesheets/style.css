@@ -39,6 +39,11 @@ img {
 
 #predict-image{
   width: 300px;
+  src="{{ image_path }}"
+}
+
+#predict-image:hover {
+  background: url("{{ original_image_path }}") no-repeat;
 }
 
 #predict-table{
@@ -223,3 +228,6 @@ img {
   margin-right: 30%;
 }
 
+#preprocess {
+  color: white
+}
