@@ -39,11 +39,6 @@ img {
 
 #predict-image{
   width: 300px;
-  src="{{ image_path }}"
-}
-
-#predict-image:hover {
-  background: url("{{ original_image_path }}") no-repeat;
 }
 
 #predict-table{
@@ -74,7 +69,8 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 50%;
+
 }
 
 #done-pred-images{
@@ -88,7 +84,7 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
+  width: 25%;
 }
 
 
@@ -228,6 +224,14 @@ img {
   margin-right: 30%;
 }
 
+.zoom-img {
+    transition:transform 1s ease;
+}
+
+.zoom-img:hover {
+    -webkit-transform:scale(2.5); /* or some other value */
+    transform:scale(2.5);
+}
 #preprocess {
   color: white
 }
