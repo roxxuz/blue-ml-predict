@@ -21,7 +21,7 @@ def deletefiles():
             os.remove(f"static/uploads/{i}")
 
 
-def resize(filename, save_image=True):
+def resize(filename, crop = True, save_image=True):
 
     image = Image.open("static/uploads/"+filename)
 
@@ -46,20 +46,28 @@ def resize(filename, save_image=True):
 
     if width > height:
         box = half_crop, 0, width-half_crop, height
+        distorted_image = image.resize((height, height))
     else:
         box = 0, half_crop, width, height-half_crop
+        distorted_image = image.resize((width, width))
 
         #Crop the sides of the image to make it square
     cropped_image = image.crop(box)
 
     if save_image == True:
-        ###SAVE IMAGE IN NEW FOLDER AND ADD RESIZED TO NAME
-        cropped_image.save(f"static/uploads/center_crop{filename}")
+        if crop == True:
+            ###SAVE IMAGE IN NEW FOLDER AND ADD RESIZED TO NAME
+            cropped_image.save(f"static/uploads/center_crop{filename}")
+        else:
+            distorted_image.save(f"static/uploads/distorted{filename}")
 
     ###GET RESIZED IMAGE AS NP ARRAY
     n_array = np.asarray(cropped_image)
     np_array = n_array/255
     np_array = np_array[:, :, :3]
 
-    return np_array
+    if crop == True:
+        return np_array
+    else:
+        return distorted_image
 

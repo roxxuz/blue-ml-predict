@@ -127,7 +127,8 @@ def prediction(filename, slider):
 
 		# Image is read from the uploads folder using the filename from the created url.
 		image = plt.imread(os.path.join('static/uploads', filename))
-
+		resize(filename, False, True)
+		filename = "distorted" + filename
 		#Sending image and filename to predict method and getting predictions and image_path in return
 		predictions, image_path = pred(image, filename)
 
