@@ -108,6 +108,7 @@ def main_page():
 @app.route('/prediction/<filename><slider>')
 def prediction(filename, slider):
 
+	#Original file name for mouse hover on predicted image in predict.html
 	original_image_path = "static/uploads/" + filename
 
 	#Checking the value of variable 'slider'.
