@@ -5,6 +5,7 @@ import numpy as np
 import os
 from tensorflow.compat.v1.keras.models import load_model
 import matplotlib.pyplot as plt
+import cv2
 
 #Dictionary to combine scores from all versions of the image
 score = {
@@ -26,16 +27,43 @@ model = load_model('models/2nd_model.h5')
 def concat_image(filename):
     from PIL import Image
 
-    im1 = Image.open(f"static/uploads/1{filename}")
-    im2 = Image.open(f"static/uploads/2{filename}")
-    im3 = Image.open(f"static/uploads/3{filename}")
-    im4 = Image.open(f"static/uploads/4{filename}")
-    im5 = Image.open(f"static/uploads/5{filename}")
-    im6 = Image.open(f"static/uploads/6{filename}")
-    im7 = Image.open(f"static/uploads/7{filename}")
-    im8 = Image.open(f"static/uploads/8{filename}")
-    im9 = Image.open(f"static/uploads/9{filename}")
-    im10 = Image.open(f"static/uploads/10{filename}")
+    ims1 = f"static/uploads/1{filename}"
+    ims2 = f"static/uploads/2{filename}"
+    ims3 = f"static/uploads/3{filename}"
+    ims4 = f"static/uploads/4{filename}"
+    ims5 = f"static/uploads/5{filename}"
+    ims6 = f"static/uploads/6{filename}"
+    ims7 = f"static/uploads/7{filename}"
+    ims8 = f"static/uploads/8{filename}"
+    ims9 = f"static/uploads/9{filename}"
+    ims10 = f"static/uploads/10{filename}"
+
+    all_ims = [ims1, ims2, ims3, ims4, ims5, ims6, ims7, ims8, ims9, ims10]
+
+    for j, i in enumerate(all_ims):
+        img = cv2.imread(i)
+
+        color = [0, 0, 0]  # 'cause purple!
+
+        # border widths; I set them all to 150
+        top, bottom, left, right = [25] * 4
+
+        bore = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)
+        cv2.imwrite(f"static/uploads/x{j+1}{filename}", bore)
+
+        #   plt.imshow(img_with_border)
+        plt.show()
+
+    im1 = Image.open(f"static/uploads/x1{filename}")
+    im2 = Image.open(f"static/uploads/x2{filename}")
+    im3 = Image.open(f"static/uploads/x3{filename}")
+    im4 = Image.open(f"static/uploads/x4{filename}")
+    im5 = Image.open(f"static/uploads/x5{filename}")
+    im6 = Image.open(f"static/uploads/x6{filename}")
+    im7 = Image.open(f"static/uploads/x7{filename}")
+    im8 = Image.open(f"static/uploads/x8{filename}")
+    im9 = Image.open(f"static/uploads/x9{filename}")
+    im10 = Image.open(f"static/uploads/x10{filename}")
 
     w, h = im1.size
 
