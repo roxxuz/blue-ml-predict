@@ -23,9 +23,6 @@ def add_header(r):
 	r.headers['Cache-Control'] = 'public, max-age=0'
 	return r
 
-#download counter for url inputs
-dl = 1
-
 #app.route defines what will happen when client visits the main page both for "GET" and "POST" methods.
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
@@ -87,13 +84,15 @@ def main_page():
 			return redirect(url_for('prediction', filename=filename, slider=slider))
 
 			# If textfield isn't empty, "getfromurl" method downloads the image from the url
-		global dl
-		if url != "":
-			getfromurl(url, dl, b)
 
-			# redirects to /prediction/<downloaded_file_name>
-			return redirect(url_for('prediction', filename=f"{str(dl)}{b}", slider=slider))
-		dl += 1
+		if url != "":
+			try:
+				getfromurl(url, b)
+
+				# redirects to /prediction/<downloaded_file_name>
+				return redirect(url_for('prediction', filename=f"{str(1)}{b}", slider=slider))
+			except:
+				return render_template('index.html')
 
 
 

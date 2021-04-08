@@ -7,10 +7,10 @@ import urllib
 
 
 # Downloads an image from url
-def getfromurl(url, dl, ext):
+def getfromurl(url, ext):
     try:
         r = requests.get(url)
-        with open(f"static/uploads/{dl}{ext}", "wb") as f:
+        with open(f"static/uploads/1{ext}", "wb") as f:
             f.write(r.content)
     except:
         
