@@ -37,8 +37,23 @@ img {
   right: 0;
 }
 
+#image-text{
+  color: white;
+  padding: 2px;
+}
+
 #predict-image{
   width: 300px;
+
+}
+
+#pred-img-div {
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  display: block
 }
 
 #predict-table{
@@ -70,6 +85,14 @@ img {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+
+}
+
+#what-is-this-zoom{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
 
 }
 
@@ -194,7 +217,7 @@ img {
   padding: 0;
 }
 
-.dropdown.links {
+/* .dropdown .links {
   color: #ffffff;
   display: none;
   position: absolute;
@@ -202,7 +225,7 @@ img {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-}
+} */
 
 
 /* Show the dropdown menu on hover */
@@ -234,6 +257,17 @@ img {
     -webkit-transform:scale(2.5); /* or some other value */
     transform:scale(2.5);
 }
+
+.what-is-this-zoom {
+    transition:transform 0.25s ease;
+    border-radius: 0%;
+}
+
+.what-is-this-zoom:hover {
+    -webkit-transform:scale(8); /* or some other value */
+    transform:scale(8);
+}
+
 #preprocess {
   color: white
 }

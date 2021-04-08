@@ -23,11 +23,6 @@ def add_header(r):
 	r.headers['Cache-Control'] = 'public, max-age=0'
 	return r
 
-dl = 1
-
-#Global variable slider to get access in both main_page and prediction method.
-#slider = '0'
-
 #app.route defines what will happen when client visits the main page both for "GET" and "POST" methods.
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
@@ -36,6 +31,7 @@ def main_page():
 	deletefiles()
 
 	# Reset "score" dictionary
+	# Needed for the 10crop pre-processing method
 	for key in score.keys():
 		score[key] = 0
 
@@ -56,7 +52,6 @@ def main_page():
 		#Prevent crash when no file is selected or
 		#the file is not an image
 		if file.filename == '' and url == '':
-			print('inside if')
 			return render_template('index.html')
 		elif (file.filename != '' and
 			os.path.splitext(file.filename)[1] != '.jpg' and
@@ -66,7 +61,7 @@ def main_page():
 		
 		# Gets the url and splits it to get the file extension. If the end of the URL isn't a file extension it sets it as .jpg
 		a, b = os.path.splitext(url)
-		if b != "jpg" or "png" or "jpeg":
+		if b != ".jpg" or ".png" or ".jpeg":
 			if "jpeg" in url:
 				b = ".jpeg"
 			if "jpg" in url:
@@ -85,18 +80,19 @@ def main_page():
 			# Saving file 'uploads/<filename.jpg>'
 			# os.path.join conatinates one or more path components separated with a /
 			file.save(os.path.join('static/uploads', filename))
-			print(f'===> Slider in main: {slider}')
 			# redirects to /prediction/<uploaded_file_name>
 			return redirect(url_for('prediction', filename=filename, slider=slider))
 
 			# If textfield isn't empty, "getfromurl" method downloads the image from the url
-		global dl
-		if url != "":
-			getfromurl(url, dl, b)
 
-			# redirects to /prediction/<downloaded_file_name>
-			return redirect(url_for('prediction', filename=f"{str(dl)}{b}", slider=slider))
-		dl += 1
+		if url != "":
+			try:
+				getfromurl(url, b)
+
+				# redirects to /prediction/<downloaded_file_name>
+				return redirect(url_for('prediction', filename=f"{str(1)}{b}", slider=slider))
+			except:
+				return render_template('index.html')
 
 
 
@@ -108,7 +104,8 @@ def main_page():
 @app.route('/prediction/<filename><slider>')
 def prediction(filename, slider):
 
-	original_image_path = "static/uploads/" + filename
+	#Original file name for mouse hover on predicted image in predict.html
+	original_image_path = "../static/uploads/" + filename
 
 	#Checking the value of variable 'slider'.
 	#This is from the html slider in index.html 
@@ -154,8 +151,13 @@ def prediction(filename, slider):
 		#The probability score gets combined for all 10 versions to make a final/combined probability score
 		predictions, image_path = ten_crop_pred(filename)
 
+	#This will make sure that there are no backslashes in the file path
+	#html <img src=> Can handle any slash.
+	#javascript code in <script> tags can not handle paths with backslash.
+	image_path = image_path.replace('\\', '/')
+
 	#return will send user to predict.html (in templates folder) and make the predictions dictionary available in the html code.
-	return render_template('predict.html', predictions=predictions, image_path=image_path)
+	return render_template('predict.html', predictions=predictions, image_path=image_path, original_image_path=original_image_path)
 
 @app.route('/howItWasDone')
 def howItWasDone():

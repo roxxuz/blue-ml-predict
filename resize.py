@@ -3,16 +3,21 @@ import math
 import numpy as np
 import os
 import requests
+import urllib
 
 
 # Downloads an image from url
-def getfromurl(url, dl, ext):
+def getfromurl(url, ext):
     try:
         r = requests.get(url)
-        with open(f"static/uploads/{dl}{ext}", "wb") as f:
+        with open(f"static/uploads/1{ext}", "wb") as f:
             f.write(r.content)
     except:
-        print("Something wrong with downloading the picture.")
+        
+        response = urllib.request.urlopen(url)
+
+        with open('static/uploads/1.jpg', 'wb') as f:
+            f.write(response.file.read())
 
 
 def deletefiles():
