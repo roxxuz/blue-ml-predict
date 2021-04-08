@@ -86,10 +86,13 @@ def main_page():
 			# If textfield isn't empty, "getfromurl" method downloads the image from the url
 
 		if url != "":
-			getfromurl(url, b)
+			try:
+				getfromurl(url, b)
 
-			# redirects to /prediction/<downloaded_file_name>
-			return redirect(url_for('prediction', filename=f"{str(1)}{b}", slider=slider))
+				# redirects to /prediction/<downloaded_file_name>
+				return redirect(url_for('prediction', filename=f"{str(1)}{b}", slider=slider))
+			except:
+				return render_template('index.html')
 
 
 
