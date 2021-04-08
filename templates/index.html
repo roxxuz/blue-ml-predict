@@ -32,22 +32,7 @@
         <output class="text-light">1</output>
         <br>
 
-        <p title="1 – Original
-
-This just resizes the image to 32x32 pixels. Unless the image is square, it will distort the image.
-
-2 – Mirror
-
-This is just a mirror version of the original.
-
-3 – Center
-
-This cuts off the sides to make the picture square before resizing it. Image will not get distorted, but you lose the information that’s being cut off.
-
-4 – 10crop
-
-This crops the image 10 times in different places. Each image gets a prediction score. The scores for each class are added up for a final predictionscore.
-" class="mb-1" style="cursor: pointer; margin-inline: 30%;"><i id="preprocess">What is this?</i></p>
+        <img id="what-is-this-zoom" src="../static/whatisthis.png" class="mb-2 mt-2 what-is-this-zoom" onmouseover="hover(this)" onmouseout="unhover(this)">
 
       </div>
       <input type=submit value=Predict class="btn btn-outline-light btn-lg mt-4 pred-button">
@@ -57,5 +42,15 @@ This crops the image 10 times in different places. Each image gets a prediction 
   </div>
 
 </body>
+
+<script>
+  function hover(element) {
+    element.setAttribute('src', '../static/whatisthis-zoom.png');
+  }
+
+  function unhover(element) {
+    element.setAttribute('src', '../static/whatisthis.png');
+  }
+</script>
 
 </html>
