@@ -264,6 +264,7 @@ img {
 }
 
 .what-is-this-zoom:hover {
+    transition:transform 3s ease;
     -webkit-transform:scale(8); /* or some other value */
     transform:scale(8);
 }
